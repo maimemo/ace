@@ -11,54 +11,37 @@
             left: 0;
             bottom: 0;
         }
-
-        .ace_BL, .ace_BR {
-            color: red;
-        }
-
-        .ace_voc {
-            color: green;
-        }
-        .ace_attr_name {
-            color: purple;
-        }
-        .ace_assign {
-            color: yellow;
-        }
-        .ace_attr_value {
-            color: purple;
-        }
-        .ace_interp, .ace_phrase, .ace_note {
-            color: green;
-        }
-
-        .ace_note_type {
-            color: purple;
-        }
     </style>
 </head>
 <body>
 <div id="editor">标题 = 123
+#chapter 2
 hello {
-    interp {
+    解释 {
         line
         line
     }
-    phrase {
+    例句 {
         line
         line
     }
-    note 谐音 {
-        line
+    助记 {
+        [谐音]nihao
         line
     }
 }
 </div>
+<!--<script src="/build/src/antlr4.js"></script>-->
 <script src="/build/src/ace.js"></script>
 <script>
     var editor = ace.edit('editor');
     editor.setTheme('ace/theme/monokai');
     editor.session.setMode('ace/mode/Notepad');
+    editor.setOptions({
+        enableBasicAutocompletion: true,
+        enableSnippets: true,
+        enableLiveAutocompletion: true
+    });
 </script>
 </body>
 </html>

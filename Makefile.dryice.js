@@ -103,7 +103,7 @@ function ace() {
     copy.file(ACE_HOME + "/build_support/editor.html",  BUILD_DIR + "/editor.html");
     copy.file(ACE_HOME + "/LICENSE", BUILD_DIR + "/LICENSE");
     copy.file(ACE_HOME + "/ChangeLog.txt", BUILD_DIR + "/ChangeLog.txt");
-    
+
     console.log('# ace ---------');
     for (var i = 0; i < 4; i++)
         buildAce({compress: i & 2, noconflict: i & 1, check: true});
@@ -321,6 +321,7 @@ function buildCore(options, extra, callback) {
     options.projectType = "main";
     options.ns = "ace";
     buildAceModule(options, callback);
+    copy.file('./antlr4.js', 'build/src/antlr4.js');
 }
 
 function buildSubmodule(options, extra, file, callback) {

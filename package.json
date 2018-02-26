@@ -35,5 +35,8 @@
         "start": "node static.js",
         "test": "node lib/ace/test/all.js",
         "lint": "eslint 'lib/ace/**/*.js'"
+    },
+    "dependencies": {
+        "antlr4": "^4.7.1"
     }
 }
