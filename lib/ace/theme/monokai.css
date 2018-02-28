@@ -1,6 +1,7 @@
 .ace-monokai .ace_gutter {
-    background: #262b34;
-    color: #8F908A
+    background: #282c34;
+    color: #8F908A;
+    /*border-right: 2px black solid;*/
 }
 
 .ace-monokai .ace_print-margin {
