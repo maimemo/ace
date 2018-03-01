@@ -144,3 +144,30 @@
 .ace-monokai .ace_SL, .ace-monokai .ace_SR, .ace-monokai .ace_note_type {
     color: #f2f2f2;
 }
+
+.ace-monokai .ace_scrollbar-v {
+  width: 4px !important;
+  transition: width .1s, background-color .3s;
+}
+
+.ace-monokai .ace_scrollbar-v:hover {
+  width: 10px !important;
+}
+
+.ace-monokai .ace_scrollbar-v::-webkit-scrollbar {
+  width: inherit;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.ace-monokai .ace_scrollbar-v:hover::-webkit-scrollbar {
+  width: inherit;
+}
+
+.ace-monokai .ace_scrollbar-v:hover::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.ace-monokai .ace_scrollbar-v::-webkit-scrollbar-thumb {
+  width: inherit;
+  background: rgba(255, 255, 255, 0.2);
+}
