@@ -31,17 +31,81 @@ hello {
     }
 }
 </div>
-<!--<script src="/build/src/antlr4.js"></script>-->
+<script src="/build/src/antlr4.js"></script>
 <script src="/build/src/ace.js"></script>
+<script src="/build/src/ext-language_tools.js"></script>
 <script>
     var editor = ace.edit('editor');
+    var langTools = ace.require('ace/ext/language_tools');
     editor.setTheme('ace/theme/monokai');
     editor.session.setMode('ace/mode/Notepad');
     editor.setOptions({
         enableBasicAutocompletion: true,
-        enableSnippets: true,
         enableLiveAutocompletion: true
     });
+    console.log(editor);
+
+    var interps = [
+        {value: 'n., ', meta: '名词', score: 100},
+        {value: 'v., ', meta: '动词', score: 99},
+        {value: 'vi., ', meta: '不及物动词', score: 98},
+        {value: 'vt., ', meta: '及物动词', score: 97},
+        {value: 'adj., ', meta: '形容词', score: 96},
+        {value: 'adv., ', meta: '副词', score: 95},
+        {value: 'prep., ', meta: '介词', score: 94},
+        {value: 'conj., ', meta: '连词', score: 93},
+        {value: 'int., ', meta: '感叹词'},
+        {value: 'pron., ', meta: '代名词'},
+        {value: 'art., ', meta: '冠词'},
+        {value: 'num., ', meta: '数词'},
+        {value: 'abbr., ', meta: '缩写'},
+        {value: 'phrase., ', meta: '短语或句子'}
+    ];
+
+    var tags = [
+        {value: '小学, ', meta: '标签'},
+        {value: '初中, ', meta: '标签'},
+        {value: '高中, ', meta: '标签'},
+        {value: '大学教科书, ', meta: '标签'},
+        {value: '四级, ', meta: '标签'},
+        {value: '六级, ', meta: '标签'},
+        {value: '专四, ', meta: '标签'},
+        {value: '专八, ', meta: '标签'},
+        {value: '考研, ', meta: '标签'},
+        {value: '新概念, ', meta: '标签'},
+        {value: 'SAT, ', meta: '标签'},
+        {value: '托福, ', meta: '标签'},
+        {value: '雅思, ', meta: '标签'},
+        {value: 'GRE, ', meta: '标签'},
+        {value: 'GMAT, ', meta: '标签'},
+        {value: '托业, ', meta: '标签'},
+        {value: 'BEC, ', meta: '标签'},
+        {value: '词典, ', meta: '标签'},
+        {value: '词频, ', meta: '标签'},
+        {value: '其他, ', meta: '标签'},
+    ];
+    var testCompleter = {
+        getCompletions: function (editor, session, pos, prefix, callback) {
+            var state = session.getState(pos.row - 1);
+            console.log(state);
+            if (state === 'block_interp' && editor.session.getLine(pos.row).replace(/ /g, '').length === 0) {
+                return callback(null, interps);
+            }
+            {
+                var attrName = session.getTokenAt(pos.row, 0);
+                if (attrName && attrName.type === 'attr_name' && attrName.value === '分类') {
+                    var token = session.getTokenAt(pos.row, pos.column);
+                    if (token && (token.type === 'assign' || token.type === 'attr_value')) {
+                        editor.completer.keep = true;
+                        return callback(null, tags);
+                    }
+                }
+
+            }
+            callback(null, []);
+        }
+    };
+    langTools.setCompleters([testCompleter]);
 </script>
 </body>
 </html>
