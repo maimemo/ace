@@ -82,14 +82,39 @@ hello {
         {value: 'BEC, ', meta: '标签'},
         {value: '词典, ', meta: '标签'},
         {value: '词频, ', meta: '标签'},
-        {value: '其他, ', meta: '标签'},
+        {value: '其他, ', meta: '标签'}
     ];
+
+    var types = [
+        '扩展',
+        '对比',
+        '其他',
+        '分析',
+        '合成',
+        '词源',
+        '联想',
+        '吐槽',
+        '语法',
+        '词根',
+        '串记',
+        '谐音',
+        '口诀'
+    ].map(x => {
+        return {value: x, meta: '助记'};
+    });
+
     var testCompleter = {
         getCompletions: function (editor, session, pos, prefix, callback) {
             var state = session.getState(pos.row - 1);
             console.log(state);
             if (state === 'block_interp' && editor.session.getLine(pos.row).replace(/ /g, '').length === 0) {
                 return callback(null, interps);
+            }
+            if (state === 'block_note') {
+                let token = editor.session.getTokenAt(pos.row, pos.column);
+                if (token && token.type === 'SL') {
+                    return callback(null, types);
+                }
             }
             {
                 var attrName = session.getTokenAt(pos.row, 0);
@@ -106,6 +131,10 @@ hello {
         }
     };
     langTools.setCompleters([testCompleter]);
+    console.log(langTools, testCompleter);
+    editor.setOption("indentedSoftWrap", false);
+    editor.session.setUseWrapMode(true);
+    window.editor = editor;
 </script>
 </body>
 </html>
