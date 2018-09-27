@@ -121,7 +121,7 @@
     background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWPQ0FD0ZXBzd/wPAAjVAoxeSgNeAAAAAElFTkSuQmCC) right repeat-y
 }
 
-.ace-monokai .ace_attr_name {
+.ace-monokai .ace_attr_name, .ace-monokai .ace_attr_start {
     color: #9933cc;
 }
 
